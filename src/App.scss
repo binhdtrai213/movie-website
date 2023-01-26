@@ -1,10 +1,121 @@
-#detail-btn {
-  width: 100%;
+$light-theme: #F0EBE3;
+$dark-theme: #121212;
+@keyframes left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
-.card-text {
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  display: -webkit-box;
+@keyframes right-to-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
+
+///////////////////////////////////////////////
+#detail-btn {
+  width: 100%;
+  border: none;
+  border-top: 2px solid $dark-theme;
+  border-radius: 0 0 5px 5px;
+  padding: 10px 0;
+}
+.App {
+  transition: 0.25s linear;
+}
+
+.navbar{
+  background-color: #ffffff4d;
+  a {
+    font-size: 18px;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+#active-navbar {
+  a {
+    color: $light-theme;
+  }
+}
+#inactive-navbar {
+  a {
+    color: $dark-theme;
+  }
+}
+
+.card {
+  border: none;
+  &:hover {
+    transform: scale(1.05);
+  }
+  .card-title {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box; 
+  }
+  .card-text {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box; 
+  }
+}
+
+.button-toggle-switch {
+  width: 45px;
+  height: 25px;
+  border-radius: 100rem;
+  position: relative;
+  margin-left: 7px;
+  cursor: pointer;  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    margin: 2px;
+    top: 0.2px;
+    border-radius: 100rem;
+  } 
+}
+
+.navbar-collapse {
+  justify-content: space-between;
+  #active-toggle {
+    background: $light-theme;
+    transition: 0.3s linear;
+    &::after {
+      background: $dark-theme;
+      right: 0;
+      border-radius: 100rem;
+      animation: left-to-right 0.3s linear;
+    }
+  }
+  #inactive-toggle {
+    background: $dark-theme;
+    transition: 0.3s linear;
+    &::after {
+      background: $light-theme;
+      left: 0;
+      border-radius: 100rem;
+      animation: right-to-left 0.3s linear;
+    }
+  }
+}
+
+#active-theme {
+  background: $dark-theme;
+}
+#inactive-theme {
+  background: $light-theme;
+}
+
