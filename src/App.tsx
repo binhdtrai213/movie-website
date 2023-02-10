@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './App.scss';
-import Banner from './component/banner';
 import Footer from './component/footer';
-import ListCard from './component/ListCard';
 import Navigation from './component/navigation';
+import { ThemeContext } from './component/ThemeContext';
+import { Routes, Route } from 'react-router-dom';
+import Homepage from './component/Homepage';
+import Contact from './component/Contact';
+import Error from './component/error';
+import Watch from './component/Watch';
 
 function App() {
-  const [theme, setTheme] = useState(false);
-
-  const changeTheme = () => {
-    setTheme(!theme);
-  }
+  const { dark } = useContext(ThemeContext)
   
   return (
-    <div className="App" id={theme ? "active-theme" : "inactive-theme"}>
-      <Navigation theme={theme} changeTheme={changeTheme} />
-      <Banner />
-      <ListCard theme={theme}/>
+    <div className="App" id={dark ? "active-theme" : "inactive-theme"}>
+      <Navigation />
+      <Routes>
+        <Route path="/home" element={<Homepage />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/watch/:id" element={<Watch />} />
+        <Route path="/*" element={<Error />} />
+      </Routes>
       <Footer/>
     </div>
   );

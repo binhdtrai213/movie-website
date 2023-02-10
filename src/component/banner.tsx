@@ -3,7 +3,7 @@ import { bannerList } from './data';
 export default function Banner() {
 
   return (
-    <div id="carouselExampleAutoplaying" className="container carousel slide px-2 px-lg-5 pt-5" data-bs-ride="carousel">
+    <div id="carouselExampleAutoplaying" className="container carousel slide px-2 px-lg-5 mt-5" data-bs-ride="carousel">
       <div className="carousel-inner">
         {bannerList.map((img, index) => 
           <div className="carousel-item active rounded-2">

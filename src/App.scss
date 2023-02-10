@@ -1,5 +1,6 @@
 $light-theme: #F0EBE3;
 $dark-theme: #121212;
+$red-theme: #E84545;
 @keyframes left-to-right {
   0% {
     transform: translateX(-100%);
@@ -18,19 +19,63 @@ $dark-theme: #121212;
   }
 }
 
+@keyframes bottom-to-top {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 ///////////////////////////////////////////////
+#active-card {
+  &:hover {
+    box-shadow: 0 10px 22px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 254, 254, 0.22);
+  }
+  #detail-btn:hover {
+    color: white;
+    &::before {
+      background: $red-theme;
+    }
+  }
+}
 #detail-btn {
-  width: 100%;
-  border: none;
-  border-top: 2px solid $dark-theme;
-  border-radius: 0 0 5px 5px;
-  padding: 10px 0;
+  width: 43%;
+  margin: 1rem 0.6rem;
+  border: 1.5px solid $dark-theme;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s linear;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: $light-theme;
+    position: absolute;
+    transition: 0.3s linear;
+    left: -100%;
+    top: 0;
+    z-index: -1;
+  }
+  &:hover {
+    border: none;
+    &::before {
+      left: 0
+    }
+  } 
 }
 .App {
   transition: 0.25s linear;
 }
 
 .navbar{
+  height: 70px;
   background-color: #ffffff4d;
   a {
     font-size: 18px;
@@ -53,8 +98,10 @@ $dark-theme: #121212;
 
 .card {
   border: none;
+  transition: 0.2s linear;
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-1%);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
   .card-title {
     -webkit-line-clamp: 1;
@@ -119,3 +166,65 @@ $dark-theme: #121212;
   background: $light-theme;
 }
 
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99;
+  .popup {
+    margin: 70px auto;
+    padding: 5px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    img {
+      width: 100%;
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+  }
+
+}
+
+.error-page {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  position: relative;
+  background: white;
+  overflow: hidden;
+  img {
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.contact {
+  .logo {
+    width: 40px;
+    margin-right: 0.5rem;
+  }
+  .contact-media {
+    margin: auto 0;
+    margin-left: 10rem;
+  }
+  h3 {
+    margin-bottom: 2rem;
+  }
+  .media {
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: $dark-theme;
+  }
+}

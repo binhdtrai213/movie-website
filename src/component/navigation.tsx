@@ -1,12 +1,17 @@
+import { useContext } from 'react';
 import logo from '../assets/logo.jpg';
+import { ThemeContext } from './ThemeContext';
+import { Link } from 'react-router-dom';
 
-export default function Navigation({theme, changeTheme} : {theme: boolean, changeTheme: Function}) {
+export default function Navigation() {
+
+  const { toggle, dark } = useContext(ThemeContext);
 
   return (
     <div>
       <nav 
         className="navbar navbar-expand-lg px-3" 
-        id={theme ? "active-navbar" : "inactive-navbar"}
+        id={dark ? "active-navbar" : "inactive-navbar"}
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="/home">
@@ -18,22 +23,22 @@ export default function Navigation({theme, changeTheme} : {theme: boolean, chang
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav">
               <li className="nav-item mx-2">
-                <a className="nav-link active" aria-current="page" href="/home">Home</a>
+                <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link" href="/news">News</a>
+                <Link className="nav-link" to="/news">News</Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link" href="/about">About</a>
+                <Link className="nav-link" to="/about">About</Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link" href="/contact">Contact</a>
+                <Link className="nav-link" to="/contact">Contact</Link>
               </li>
             </ul>
             <div 
-              onClick={() => changeTheme()} 
+              onClick={toggle} 
               className="button-toggle-switch"
-              id={theme ? "active-toggle" : "inactive-toggle"}
+              id={dark ? "active-toggle" : "inactive-toggle"}
             >
             </div>
           </div>
