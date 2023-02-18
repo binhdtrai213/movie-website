@@ -1,12 +1,27 @@
+import { Box, Modal } from '@mui/material';
 import { useState } from 'react';
 import { Card } from './Card';
 import { filmInformation } from './data';
+import CloseIcon from '@mui/icons-material/Close';
 
 type FilmType = {
   id: number,
   name: string,
   description: string,
   img: string,
+};
+
+const Style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '50%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  padding: 4,
+  borderRadius: '10px',
 };
 
 export default function ListCard() {
@@ -25,23 +40,28 @@ export default function ListCard() {
         </div>)
       }
       </div>
-      {popup && <div className='overlay' onClick={() => setPopup(undefined)}>
-        <div className='popup card p-3' style={{ width: '50%' }}>
+      {popup && <Modal
+        open={popup !== undefined}
+        onClose={() => setPopup(undefined)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={Style}>
           <button 
-            type="button" 
-            className="btn-close mb-2" 
-            style={{ marginLeft: 'calc(100% - 20px)' }}
+            className="btn-close-card"
             onClick={() => setPopup(undefined)}
-            data-bs-dismiss="modal" 
-            aria-label="Close">
+          >
+            <CloseIcon />
           </button>
           <img src={popup.img} className="card-img-top" alt="film"/>
           <div className="card-body">
-            <h5 className="card-title">{popup.name}</h5>
+            <h5 style={{ margin: '10px 0' }}>{popup.name}</h5>
             <p className="card-text" title={popup.description}>{popup.description}</p>
           </div>
-        </div>
-      </div>}
+        </Box>
+        
+      </Modal>}
+      
     </div>
   )
 }

@@ -10,18 +10,11 @@
     position: absolute;
   }
   
-  body{
-      background: #1B0034;
-      background-image: linear-gradient( 135deg, #1B0034 10%, #33265C 100%);
-      background-attachment: fixed;
-      background-size: cover;
-  
-  }
-  
+.error-page {
   .error {
       width: 100%;
       height: auto;
-      margin: 50px auto;
+      margin: 0px auto;
       text-align: center;
       margin-bottom: 0;
   }
@@ -49,7 +42,8 @@
     height: 500px;
     position: relative;
     margin: 9% auto 0;
-  animation: ani9 0.7s ease-in-out infinite  alternate ;}
+    animation: ani9 0.7s ease-in-out infinite  alternate ;
+  }
   
   @keyframes ani9 {
       0%{
@@ -169,22 +163,25 @@
       font-family: 'Combo', cursive;
       margin-bottom: 20px;
   }
-button.go-back {
-    font-size: 30px;
-    font-family: 'Combo', cursive;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: 0.3s linear;
-    z-index: 9;
-    border-radius: 10px;
-    background: #C0D7DD;
-    color: #33265C;
-    box-shadow: 0 0 10px 0 #C0D7DD;
-    margin-top: 20px;
+  button.go-back {
+      font-size: 30px;
+      font-family: 'Combo', cursive;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s linear;
+      z-index: 9;
+      border-radius: 10px;
+      background: #C0D7DD;
+      color: #33265C;
+      box-shadow: 0 0 10px 0 #C0D7DD;
+      margin-top: 20px;
+  }
+  button:hover {
+      box-shadow: 0 0 20px 0 #C0D7DD;
+  }
 }
-button:hover {
-    box-shadow: 0 0 20px 0 #C0D7DD;
-}
+  
+  
   
   

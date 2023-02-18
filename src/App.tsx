@@ -9,6 +9,7 @@ import Contact from './component/Contact';
 import Error from './component/error';
 import Watch from './component/Watch';
 import About from './component/about';
+import News from './component/news';
 
 function App() {
   const { dark } = useContext(ThemeContext)
@@ -22,6 +23,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/about" element={<About />} />
+        <Route path="/news" element={<News />} />
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer/>
