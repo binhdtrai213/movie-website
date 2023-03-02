@@ -1,7 +1,6 @@
-import ErrorImage from '../assets/notfound.jpg';
-import Bye from '../assets/bye.gif';
+import React from 'react'
 import './error.scss'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 export default function Error() {
   return (
@@ -10,7 +9,7 @@ export default function Error() {
       <div className="container">
         <div className="error">
           <p className="p">4</p>
-          <span className="dracula">			
+          <span className="dracula">
             <div className="con">
               <div className="hair"></div>
               <div className="hair-r"></div>
@@ -26,20 +25,17 @@ export default function Error() {
           <div className="page-ms">
             <p className="page-msg"> Oops, Can not find your page! </p>
             <NavLink to="/home">
-              <button className="go-back">
-                Go Back
-              </button>
+              <button className="go-back">Go Back</button>
             </NavLink>
           </div>
         </div>
       </div>
-      <iframe 
-        style={{ width: 0, height: 0, border: 'none' }} 
-        allow="autoplay" 
+      <iframe
+        style={{ width: 0, height: 0, border: 'none' }}
+        allow="autoplay"
         src="https://instaud.io/_/2Vvu.mp3"
-        title='nothing'
-      >
-      </iframe>
-    </div>  
+        title="nothing"
+      ></iframe>
+    </div>
   )
 }

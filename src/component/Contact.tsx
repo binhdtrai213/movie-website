@@ -1,52 +1,56 @@
-import { useState } from 'react';
-import CameraImg from '../assets/camera2.png';
-import FacebookLogo from '../assets/facebook-logo.png';
-import GmailLogo from '../assets/gmail-logo.png';
-import TwitterLogo from '../assets/twitter-logo.png';
-import InstagramLogo from '../assets/instagram-logo.png';
-import { Button, FormControl, Grid, TextField } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import Alert from '@mui/material/Alert';
+import React, { useState } from 'react'
+import FacebookLogo from '../assets/facebook-logo.png'
+import GmailLogo from '../assets/gmail-logo.png'
+import TwitterLogo from '../assets/twitter-logo.png'
+import InstagramLogo from '../assets/instagram-logo.png'
+import { Button, FormControl, Grid, TextField } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
+import Alert from '@mui/material/Alert'
 
 export default function Contact() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
-  const [isPopup, setIsPopup] = useState(false);
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [message, setMessage] = useState('')
+  const [isPopup, setIsPopup] = useState(false)
 
   const handleSend = () => {
-    setIsPopup(true);
-    setTimeout(() => setIsPopup(false), 3000);
-    setName('');
-    setMessage('');
-    setEmail('');
-    setPhone('');
-    setMessage('');
+    setIsPopup(true)
+    setTimeout(() => {
+      setIsPopup(false)
+    }, 3000)
+    setName('')
+    setMessage('')
+    setEmail('')
+    setPhone('')
+    setMessage('')
   }
 
   return (
-    <Grid container spacing={2} className='contact'>
+    <Grid container spacing={2} className="contact">
       <Grid item xs={6} spacing={2}>
-        <div className='contact-media'>
+        <div className="contact-media">
           <h3>Contact Us</h3>
-          <a className='gmail media' href='https://www.facebook.com/DaoThienBinh/'>
-            <img className='logo' src={FacebookLogo} alt='facebook logo' /> 
+          <a
+            className="gmail media"
+            href="https://www.facebook.com/DaoThienBinh/"
+          >
+            <img className="logo" src={FacebookLogo} alt="facebook logo" />
             <span>www.facebook.com/DaoThienBinh/</span>
           </a>
-          <div className='p-2'/>
-          <a className='facebook media' href='https://www.gmail.com/'>
-            <img className='logo' src={GmailLogo} alt='gmail logo' />
+          <div className="p-2" />
+          <a className="facebook media" href="https://www.gmail.com/">
+            <img className="logo" src={GmailLogo} alt="gmail logo" />
             <span>www.gmail.com/</span>
           </a>
-          <div className='p-2'/>
-          <a className='twitter media' href='https://twitter.com/?lang=en' >
-            <img className='logo' src={TwitterLogo} alt='twitter logo' />
+          <div className="p-2" />
+          <a className="twitter media" href="https://twitter.com/?lang=en">
+            <img className="logo" src={TwitterLogo} alt="twitter logo" />
             <span>twitter.com/?lang=en</span>
           </a>
-          <div className='p-2'/>
-          <a className='instagram media' href='https://www.instagram.com/'>
-            <img className='logo' src={InstagramLogo} alt='instagram logo' />
+          <div className="p-2" />
+          <a className="instagram media" href="https://www.instagram.com/">
+            <img className="logo" src={InstagramLogo} alt="instagram logo" />
             <span>www.instagram.com/</span>
           </a>
         </div>
@@ -61,7 +65,7 @@ export default function Contact() {
             style={{ marginBottom: '20px' }}
             required={true}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setName(event.target.value);
+              setName(event.target.value)
             }}
           />
           <TextField
@@ -71,7 +75,7 @@ export default function Contact() {
             style={{ marginBottom: '20px' }}
             required={true}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setEmail(event.target.value);
+              setEmail(event.target.value)
             }}
           />
           <TextField
@@ -81,7 +85,7 @@ export default function Contact() {
             style={{ marginBottom: '20px' }}
             required={true}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setPhone(event.target.value);
+              setPhone(event.target.value)
             }}
           />
           <TextField
@@ -93,22 +97,27 @@ export default function Contact() {
             style={{ marginBottom: '20px' }}
             required={true}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setMessage(event.target.value);
+              setMessage(event.target.value)
             }}
           />
-          <Button 
-            variant="contained" 
-            endIcon={<SendIcon />} 
+          <Button
+            variant="contained"
+            endIcon={<SendIcon />}
             style={{ width: '50%', margin: '0 auto' }}
-            onClick={() => handleSend()}
+            onClick={() => {
+              handleSend()
+            }}
           >
             Send
           </Button>
         </FormControl>
       </Grid>
-      {isPopup && <Alert severity="success" className='popup'>Your message will send to US soon! ❤️</Alert>}
-    </Grid>    
+      {isPopup && (
+        <Alert severity="success" className="popup">
+          Your message will send to US soon! ❤️
+        </Alert>
+      )}
+    </Grid>
     //   {/* <img className='col-5' src={CameraImg} alt="Camera" /> */}
-
   )
 }

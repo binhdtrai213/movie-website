@@ -1,15 +1,17 @@
-import { Box, Modal } from '@mui/material';
-import { useState } from 'react';
-import { Card } from './Card';
-import { filmInformation } from './data';
-import CloseIcon from '@mui/icons-material/Close';
+import React, { useState } from 'react'
+import { Box, Modal } from '@mui/material'
 
-type FilmType = {
-  id: number,
-  name: string,
-  description: string,
-  img: string,
-};
+import { Card } from './Card'
+import { useSelector } from 'react-redux'
+import CloseIcon from '@mui/icons-material/Close'
+import { type RootState } from './redux/store'
+
+interface FilmType {
+  id: number
+  name: string
+  description: string
+  img: string
+}
 
 const Style = {
   position: 'absolute',
@@ -22,47 +24,53 @@ const Style = {
   boxShadow: 24,
   padding: 4,
   borderRadius: '10px',
-};
+}
 
 export default function ListCard() {
-  const [popup, setPopup] = useState<FilmType | undefined>();
+  const [popup, setPopup] = useState<FilmType | undefined>()
+  const videos = useSelector((state: RootState) => state.video.value)
 
   const updatePopup = (film: FilmType) => {
-    setPopup(film);
+    setPopup(film)
   }
 
   return (
     <div className="container">
       <div className="row p-5 pt-4">
-      {filmInformation.map(film => 
-        <div className="col-12 col-md-6 col-lg-4 p-3 pt-0" key={film.id}>
-          <Card film={film} clicked={updatePopup} /> 
-        </div>)
-      }
-      </div>
-      {popup && <Modal
-        open={popup !== undefined}
-        onClose={() => setPopup(undefined)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={Style}>
-          <button 
-            className="btn-close-card"
-            onClick={() => setPopup(undefined)}
-          >
-            <CloseIcon />
-          </button>
-          <img src={popup.img} className="card-img-top" alt="film"/>
-          <div className="card-body">
-            <h5 style={{ margin: '10px 0' }}>{popup.name}</h5>
-            <p className="card-text" title={popup.description}>{popup.description}</p>
+        {videos.map((film) => (
+          <div className="col-12 col-md-6 col-lg-4 p-3 pt-0" key={film.id}>
+            <Card film={film} clicked={updatePopup} />
           </div>
-        </Box>
-        
-      </Modal>}
-      
+        ))}
+      </div>
+      {popup != null && (
+        <Modal
+          open={popup !== undefined}
+          onClose={() => {
+            setPopup(undefined)
+          }}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={Style}>
+            <button
+              className="btn-close-card"
+              onClick={() => {
+                setPopup(undefined)
+              }}
+            >
+              <CloseIcon />
+            </button>
+            <img src={popup.img} className="card-img-top" alt="film" />
+            <div className="card-body">
+              <h5 style={{ margin: '10px 0' }}>{popup.name}</h5>
+              <p className="card-text" title={popup.description}>
+                {popup.description}
+              </p>
+            </div>
+          </Box>
+        </Modal>
+      )}
     </div>
   )
 }
-

@@ -1,21 +1,22 @@
-import React, { useContext } from 'react';
-import './App.scss';
-import Footer from './component/footer';
-import Navigation from './component/navigation';
-import { ThemeContext } from './component/ThemeContext';
-import { Routes, Route } from 'react-router-dom';
-import Homepage from './component/Homepage';
-import Contact from './component/Contact';
-import Error from './component/error';
-import Watch from './component/Watch';
-import About from './component/about';
-import News from './component/news';
+import React, { useContext } from 'react'
+import './App.scss'
+import Footer from './component/footer'
+import Navigation from './component/navigation'
+import { ThemeContext } from './component/ThemeContext'
+import { Routes, Route } from 'react-router-dom'
+import Homepage from './component/Homepage'
+import Contact from './component/Contact'
+import Error from './component/error'
+import Watch from './component/Watch'
+import About from './component/about'
+import News from './component/news'
+import AddVideo from './component/AddVideo'
 
 function App() {
   const { dark } = useContext(ThemeContext)
-  
+
   return (
-    <div className="App" id={dark ? "active-theme" : "inactive-theme"}>
+    <div className="App" id={dark ? 'active-theme' : 'inactive-theme'}>
       <Navigation />
       <Routes>
         <Route path="/home" element={<Homepage />} />
@@ -24,11 +25,12 @@ function App() {
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/about" element={<About />} />
         <Route path="/news" element={<News />} />
+        <Route path="/add-video" element={<AddVideo />} />
         <Route path="/*" element={<Error />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
