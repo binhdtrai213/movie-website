@@ -1,17 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Modal } from '@mui/material'
 
 import { Card } from './Card'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CloseIcon from '@mui/icons-material/Close'
 import { type RootState } from './redux/store'
-
-interface FilmType {
-  id: number
-  name: string
-  description: string
-  img: string
-}
+import { VideoAPI } from './VideoApi/VideoAPI'
+import { getImage } from './helper/Utils'
+import { setInitialValue } from './redux/slice'
+import { type videoType } from './data'
 
 const Style = {
   position: 'absolute',
@@ -27,12 +24,23 @@ const Style = {
 }
 
 export default function ListCard() {
-  const [popup, setPopup] = useState<FilmType | undefined>()
+  const [popup, setPopup] = useState<videoType | undefined>()
   const videos = useSelector((state: RootState) => state.video.value)
+  const dispatch = useDispatch()
 
-  const updatePopup = (film: FilmType) => {
+  const updatePopup = (film: videoType) => {
     setPopup(film)
   }
+
+  useEffect(() => {
+    VideoAPI.getAll()
+      .then((res) => {
+        dispatch(setInitialValue(res.data))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <div className="container">
@@ -61,7 +69,11 @@ export default function ListCard() {
             >
               <CloseIcon />
             </button>
-            <img src={popup.img} className="card-img-top" alt="film" />
+            <img
+              src={getImage(popup.video)}
+              className="card-img-top"
+              alt="film"
+            />
             <div className="card-body">
               <h5 style={{ margin: '10px 0' }}>{popup.name}</h5>
               <p className="card-text" title={popup.description}>

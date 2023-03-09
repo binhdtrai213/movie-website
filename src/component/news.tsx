@@ -8,6 +8,8 @@ import { Grid } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { type RootState } from './redux/store'
+import { getImage } from './helper/Utils'
+import gif from '../assets/totoro.png'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -95,7 +97,7 @@ export default function News() {
                   setShow(false)
                 }}
               >
-                <img src={film.img} className="card-img-top" alt="film" />
+                <img src={getImage(film.video)} className="card-img-top" alt="film" />
                 {show && <div className="layer"></div>}
                 {show && (
                   <NavLink to={`/watch/${film.id}`} className="hover-watch">
@@ -105,7 +107,7 @@ export default function News() {
               </div>
             </Grid>
             <Grid item xs={3} style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={film.gif} className="gif-news" alt="film" />
+              <img src={gif} className="gif-news" alt="film" />
             </Grid>
           </Grid>
 
