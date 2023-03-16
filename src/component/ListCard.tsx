@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Modal } from '@mui/material'
+import { Box, Modal, Skeleton } from '@mui/material'
 
 import { Card } from './Card'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,9 +23,12 @@ const Style = {
   borderRadius: '10px',
 }
 
+const array3 = ['', '', '']
+
 export default function ListCard() {
   const [popup, setPopup] = useState<videoType | undefined>()
   const videos = useSelector((state: RootState) => state.video.value)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   const updatePopup = (film: videoType) => {
@@ -33,9 +36,11 @@ export default function ListCard() {
   }
 
   useEffect(() => {
+    setLoading(true)
     VideoAPI.getAll()
       .then((res) => {
         dispatch(setInitialValue(res.data))
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -45,11 +50,45 @@ export default function ListCard() {
   return (
     <div className="container">
       <div className="row p-5 pt-4">
-        {videos.map((film) => (
-          <div className="col-12 col-md-6 col-lg-4 p-3 pt-0" key={film.id}>
-            <Card film={film} clicked={updatePopup} />
-          </div>
-        ))}
+        {!loading
+          ? videos.map((film) => (
+              <div className="col-12 col-md-6 col-lg-4 p-3 pt-0" key={film.id}>
+                <Card film={film} clicked={updatePopup} />
+              </div>
+          ))
+          : array3.map((value, index) => (
+              <div className="col-12 col-md-6 col-lg-4 p-3 pt-0" key={index}>
+                <Box
+                  sx={{
+                    width: '100%',
+                    marginRight: 0.5,
+                    padding: '1rem',
+                    my: 5,
+                    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                  }}
+                >
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width="100%"
+                    height={150}
+                    sx={{ margin: '1rem 0', borderRadius: '5px' }}
+                  />
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    sx={{ marginBottom: '1rem', borderRadius: '5px' }}
+                  />
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    width="60%"
+                    sx={{ marginBottom: '1rem', borderRadius: '5px' }}
+                  />
+                </Box>
+              </div>
+          ))
+        }
       </div>
       {popup != null && (
         <Modal
