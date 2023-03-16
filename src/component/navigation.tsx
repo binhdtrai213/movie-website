@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react'
 import logo from '../assets/logo.jpg'
 import { ThemeContext } from './ThemeContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import Button from '@mui/material/Button'
@@ -15,16 +15,23 @@ export default function Navigation() {
   const [hover, setHover] = useState(false)
   const [user, setUser] = useState<any | undefined>()
   const [isLogout, setIsLogout] = useState(false)
+  const navigate = useNavigate()
 
   const handleClick = () => {
     signInWithPopup(auth, provider)
       .then((res) => {
         setUser(res.user)
+        localStorage.setItem('user', JSON.stringify(res.user))
       })
       .catch((err) => {
         console.log(err)
       })
   }
+
+  React.useEffect(() => {
+    const currentUser = localStorage.getItem('user')
+    if (currentUser && currentUser !== '{}') setUser(JSON.parse(currentUser))
+  }, [])
 
   return (
     <div>
@@ -90,11 +97,13 @@ export default function Navigation() {
                   Contact
                 </Link>
               </li>
-              <li className="nav-item mx-2 alignCenter">
-                <Link className="nav-link" to="/add-video">
-                  Create
-                </Link>
-              </li>
+              {user && (
+                <li className="nav-item mx-2 alignCenter">
+                  <Link className="nav-link" to="/add-video">
+                    Create
+                  </Link>
+                </li>
+              )}
             </ul>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div
@@ -126,6 +135,8 @@ export default function Navigation() {
                       onClick={() => {
                         setUser(undefined)
                         setIsLogout(false)
+                        localStorage.removeItem('user')
+                        navigate(0)
                       }}
                       onMouseEnter={() => {
                         setIsLogout(true)

@@ -16,6 +16,13 @@ export const VideoAPI = {
       data
     })
   },
+  editVideo: async (id: string, data: any) => {
+    return await axios({
+      method: 'put',
+      url: `${http}/${id}`,
+      data
+    })
+  },
   deleteVideo: async (id: string) => {
     return await axios({
       method: 'delete',
